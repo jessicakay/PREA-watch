@@ -41,3 +41,16 @@ state_data <- as.data.frame(
 )
 
 View(state_data)
+
+library(stringr)
+
+temp_state$variable[which(
+  str_detect(temp_state$variable,"[[:digit:]]+\\s-[[:alpha:]]+")
+  )]<-temp_state$variable[which(str_detect(temp_state$variable,"[[:digit:]]+\\s-[[:alpha:]]+"))]
+
+
+yearRows<-which(str_detect(state_data$variable,"[[:digit:]]+\\s-[[:alpha:]]+")==TRUE)
+
+temp_state[yearRows,]
+
+str_extract(state_data$variable,"[[:digit:]]+")
