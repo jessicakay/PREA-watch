@@ -37,12 +37,16 @@ var_names <- c(
 state_data <- as.data.frame(
   temp_state %>%
     select(variable, substantiated, pending, unfounded, unsubstantiated) %>%
-    filter(variable %in% var_names)
+    filter(variable %in% var_names | str_detect(variable, "[[:digit:]]+") == TRUE)
 )
 
 View(state_data)
 
 library(stringr)
+
+state_data[yearRows,][1]
+
+as.data.frame(str_extract_all(state_data[yearRows,][1],"[[:digit:]]+"))
 
 temp_state$variable[which(
   str_detect(temp_state$variable,"[[:digit:]]+\\s-[[:alpha:]]+")
