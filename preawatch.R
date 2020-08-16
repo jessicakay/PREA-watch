@@ -59,13 +59,12 @@ state_data <-state_data %>%
 #  i<-i+1
 # }
 
+yearRows<-which(str_detect(state_data$variable,"[[:digit:]]+")==TRUE)
+
+str_extract(state_data[yearRows,]$variable,"[[:alpha:]]+\\(?\\s[[:alpha:]]+")
 
 
-yearRows<-which(str_detect(state_data$variable,"[[:digit:]]+\\s-[[:alpha:]]+")==TRUE)
-
-
-
-state_data[yearRows+1,]$year<-state_data[yearRows,]$year
-state_data[yearRows+2,]$year<-state_data[yearRows,]$year
+state_data[yearRows+1,]$year<-state_data[yearRows,]$year 
+state_data[yearRows+2,]$year<-state_data[yearRows,]$year 
 state_data[yearRows+3,]$year<-state_data[yearRows,]$year
 state_data[yearRows+4,]$year<-state_data[yearRows,]$year
