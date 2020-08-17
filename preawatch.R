@@ -47,7 +47,7 @@ state_data <-state_data %>%
   mutate(year = case_when(
     str_detect(state_data$variable, "[[:digit:]]+") == TRUE ~  
       str_extract(state_data$variable, "[[:digit:]]+")
-  )
+    )
   )
 
 
