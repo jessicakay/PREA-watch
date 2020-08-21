@@ -82,3 +82,9 @@ state_data[yearRows+4,]$facility<-str_extract(state_data[yearRows,]$variable,"[[
 #  i<-i+1
 # }
 
+View(
+    state_data %>% 
+  select(colnames(state_data)) %>%
+  melt(id.vars=c("year","facility"),
+       measure.vars=c("substantiated","pending","unfounded","unsubstantiated"))
+)
