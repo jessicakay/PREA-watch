@@ -35,7 +35,7 @@ temp_state$variable[which(str_detect(temp_state$variable,"inamte"))]<-
 var_names <- c(
   "Inmate on inmate sex acts",
   "Inmate on inmate sex abuse",
-  "Inmate on inmate sexual harrassment",
+  "Inmate on inmate sexual harassment",
   "Staff sexual misconduct",
   "Staff-inmate sexual harassment"
   )
@@ -68,10 +68,13 @@ state_data[yearRows+1,]$year<-state_data[yearRows,]$year
 state_data[yearRows+2,]$year<-state_data[yearRows,]$year 
 state_data[yearRows+3,]$year<-state_data[yearRows,]$year
 state_data[yearRows+4,]$year<-state_data[yearRows,]$year
+state_data[yearRows+5,]$year<-state_data[yearRows,]$year
 state_data[yearRows+1,]$facility<-str_extract(state_data[yearRows,]$variable,"[[:alpha:]]+\\(?\\s[[:alpha:]]+")
 state_data[yearRows+2,]$facility<-str_extract(state_data[yearRows,]$variable,"[[:alpha:]]+\\(?\\s[[:alpha:]]+")
 state_data[yearRows+3,]$facility<-str_extract(state_data[yearRows,]$variable,"[[:alpha:]]+\\(?\\s[[:alpha:]]+")
 state_data[yearRows+4,]$facility<-str_extract(state_data[yearRows,]$variable,"[[:alpha:]]+\\(?\\s[[:alpha:]]+")
+state_data[yearRows+5,]$facility<-str_extract(state_data[yearRows,]$variable,"[[:alpha:]]+\\(?\\s[[:alpha:]]+")
+
 
 
 # future loop to cut down on redundant code
@@ -83,6 +86,14 @@ state_data[yearRows+4,]$facility<-str_extract(state_data[yearRows,]$variable,"[[
 #  }
 #  i<-i+1
 # }
+
+# convert string to numeric data
+
+new_df<-state_data[-yearRows,] # remove header rows
+
+new_df[c(2,3,4,5)]<-str_extract_all(new_df[c(2,3,4,5)],"[[:digit:]]+")
+
+
 
 # render data in long format
 
