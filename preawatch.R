@@ -11,6 +11,8 @@ install.packages("dplyr")
 
 library(reshape2)
 library(dplyr)
+library(stringr)
+
 fileDir<-"~/Downloads/PREA Report.xlsx"
 
 original_state<-readxl::read_xlsx(fileDir,sheet = 2)
@@ -81,6 +83,8 @@ state_data[yearRows+4,]$facility<-str_extract(state_data[yearRows,]$variable,"[[
 #  }
 #  i<-i+1
 # }
+
+# render data in long format
 
 View(
     state_data %>% 
