@@ -13,7 +13,7 @@ library(reshape2)
 library(dplyr)
 library(stringr)
 
-attribution <- "github.com/jessicakay/crimeviz"
+attribution <- "github.com/jessicakay/PREA-watch"
 
 fileDir<-"~/Downloads/PREA Report.xlsx"
 
