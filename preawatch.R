@@ -113,6 +113,7 @@ View(
 
 library(ggplot2)
 
+png("~/Desktop/prea_souza.png",width = 800, height = 1000)
 gridExtra::grid.arrange(
 new_df %>%
   select(total,year) %>%
@@ -132,5 +133,6 @@ labs(subtitle = "Distribution of reports year year",caption = attribution)+
   xlab("number of reports")+
   ylab("frequency")
 )
+dev.off()
 
 new_df %>% select(total)
