@@ -86,6 +86,15 @@ state_data[yearRows+4,]$facility<-str_extract(state_data[yearRows,]$variable,"[[
 state_data[yearRows+5,]$facility<-str_extract(state_data[yearRows,]$variable,"[[:alpha:]]+\\(?\\s[[:alpha:]]+")
 state_data[yearRows+6,]$facility<-str_extract(state_data[yearRows,]$variable,"[[:alpha:]]+\\(?\\s[[:alpha:]]+")
 state_data$substantiated[str_detect(state_data$substantiated,"201[[:digit:]]")]<-NA
+
+as.numeric(state_data$substantiated[yearRows+1])+
+as.numeric(state_data$substantiated[yearRows+2])+
+as.numeric(state_data$substantiated[yearRows+3])+
+as.numeric(state_data$substantiated[yearRows+4])+
+as.numeric(state_data$substantiated[yearRows+5])
+  
+  
+
 new_df<-state_data[-c(yearRows,yearRows+6),] # remove header rows
 
 # convert string to numeric data
@@ -102,6 +111,17 @@ new_df[c(2,3,4,5)]<-str_extract_all(new_df[c(2,3,4,5)],"[[:digit:]]+")
 new_df$total<-as.numeric(new_df$substantiated)+as.numeric(new_df$pending)+
   as.numeric(new_df$unfounded)+as.numeric(new_df$unsubstantiated)
 
+new_df$total_reports[yearRows]<-new_df$total[yearRows] # add all by year
+
+
+i <- 0
+y <- 1
+for (i in 1:4) {
+  y <- c(y, yearRows + i)
+  i <- i + 1
+}
+
+  
 # render data in long format
 
 View(
@@ -113,7 +133,7 @@ View(
 
 library(ggplot2)
 
-png("~/Desktop/prea_souza.png",width = 800, height = 1000)
+png("~/Documents/GitHub/PREA-watch/souza.png",width = 800, height = 1000)
 gridExtra::grid.arrange(
 new_df %>%
   select(total,year) %>%
@@ -136,3 +156,8 @@ labs(subtitle = "Distribution of reports year year",caption = attribution)+
 dev.off()
 
 new_df %>% select(total)
+
+new_df %>% 
+  select(substantiated,pending,unfounded,unsubstantiated,variable) %>%
+  ggplot()+
+  geom_point(aes(x=substantiated))
